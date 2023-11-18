@@ -1,4 +1,5 @@
-using aspnetapp;
+using aspnetapp.Code;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +16,16 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//允许读取缓冲区的BODY流
+app.Use((context, next) =>
+{
+    context.Request.EnableBuffering();
+    return next();
+});
+//允许跨域            
+app.UseCorsMiddleware();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.MapControllers();

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using aspnetapp;
+using aspnetapp.Code;
+using aspnetapp.Code.ApiModel;
 
 public class CounterRequest {
     public string action { get; set; }

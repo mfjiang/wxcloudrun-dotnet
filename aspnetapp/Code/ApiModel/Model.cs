@@ -1,4 +1,4 @@
-namespace aspnetapp
+namespace aspnetapp.Code.ApiModel
 {
     public class Counter
     {

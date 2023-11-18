@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using aspnetapp.Code.ApiModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace aspnetapp
+namespace aspnetapp.Code
 {
     public partial class CounterContext : DbContext
     {
@@ -26,7 +27,7 @@ namespace aspnetapp
                 var host = addressParts?[0];
                 var port = addressParts?[1];
                 var connstr = $"server={host};port={port};user={username};password={password};database=aspnet_demo";
-                optionsBuilder.UseMySql(connstr, Microsoft.EntityFrameworkCore.ServerVersion.Parse("5.7.18-mysql"));
+                optionsBuilder.UseMySql(connstr, ServerVersion.Parse("5.7.18-mysql"));
             }
         }
 
