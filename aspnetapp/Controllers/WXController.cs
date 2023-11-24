@@ -12,7 +12,7 @@ namespace aspnetapp.Controllers
     public class WXController : EnhancedApiController
     {
         [HttpPost]
-        public async Task<ApiResult<string>> LoadWXOpenData(ReqWXOpenDataModel req)
+        public async Task<ApiResult<string>> LoadWXOpenData([FromBody]ReqWXOpenDataModel req)
         {
             Log(nameof(WXController), $"ip:{base.RemoteIP}", JsonConvert.SerializeObject(req));
             string appid = "wx74885639a90f3ac7";
