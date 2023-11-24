@@ -15,13 +15,13 @@ namespace aspnetapp.Controllers
     {
         [HttpGet]
         [Route("GetWXOpenData")]
-        public async Task<ApiResult<string>> GetWXOpenData(string cloudid)
+        public async Task<ApiResult<WXApiRspModel>> GetWXOpenData(string cloudid)
         {
             ReqWXOpenDataModel req = new ReqWXOpenDataModel();
              
             string appsecret = "?";
             string json = "";
-            ApiResult<string> r = new ApiResult<string>();
+            ApiResult<WXApiRspModel> r = new ApiResult<WXApiRspModel>();
 
             StringBuilder headerdic = new StringBuilder();
             foreach (var item in Request.Headers)
@@ -39,7 +39,8 @@ namespace aspnetapp.Controllers
                 Log(nameof(WXController), $"ip:{base.RemoteIP}", headerdic.ToString());
 
                 json = await GetOpenData(req.appid, req.openid, req.cloudid);
-                r.Succeed("", json);
+                var obj = JsonConvert.DeserializeObject<WXApiRspModel>(json);
+                r.Succeed("",obj);
             }
             catch (Exception ex)
             {
