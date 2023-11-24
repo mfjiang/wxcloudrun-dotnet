@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace aspnetapp.Controllers
 {
@@ -22,6 +23,12 @@ namespace aspnetapp.Controllers
             string json = "";
             ApiResult<string> r = new ApiResult<string>();
 
+            StringBuilder headerdic = new StringBuilder();
+            foreach (var item in Request.Headers)
+            {
+                headerdic.AppendLine($"{item.Key}:{item.Value}");
+            }
+
             try
             {
                 req.openid = Request.Headers["x-wx-from-openid"].ToString();
@@ -29,6 +36,7 @@ namespace aspnetapp.Controllers
                 req.cloudid = cloudid;
 
                 Log(nameof(WXController), $"ip:{base.RemoteIP}", JsonConvert.SerializeObject(req));
+                Log(nameof(WXController), $"ip:{base.RemoteIP}", headerdic.ToString());
 
                 json = await GetOpenData(req.appid, req.openid, req.cloudid);
                 r.Succeed("", json);
