@@ -4,25 +4,32 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 
 namespace aspnetapp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/wx")]
     [ApiController]
     public class WXController : EnhancedApiController
     {
         [HttpPost]
-        public async Task<ApiResult<string>> LoadWXOpenData([FromBody]ReqWXOpenDataModel req)
+        public async Task<ApiResult<string>> LoadWXOpenData(string cloudid)
         {
-            Log(nameof(WXController), $"ip:{base.RemoteIP}", JsonConvert.SerializeObject(req));
-            string appid = "wx74885639a90f3ac7";
+            ReqWXOpenDataModel req = new ReqWXOpenDataModel();
+             
             string appsecret = "?";
             string json = "";
             ApiResult<string> r = new ApiResult<string>();
 
             try
             {
-                json = await GetOpenData(appid, req.openid, req.cloudid);
+                req.openid = Request.Headers["x-wx-from-openid"].ToString();
+                req.appid = Request.Headers["x-wx-from-appid"].ToString();
+                req.cloudid = cloudid;
+
+                Log(nameof(WXController), $"ip:{base.RemoteIP}", JsonConvert.SerializeObject(req));
+
+                json = await GetOpenData(req.appid, req.openid, req.cloudid);
                 r.Succeed("", json);
             }
             catch (Exception ex)

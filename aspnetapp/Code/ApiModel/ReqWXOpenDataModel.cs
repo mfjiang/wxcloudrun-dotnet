@@ -4,5 +4,6 @@
     {
         public string openid { get; set; } = "";
         public string cloudid { get; set; } = "";
+        public string appid { get; set; } = "";
     }
 }
