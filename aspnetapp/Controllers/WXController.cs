@@ -23,11 +23,11 @@ namespace aspnetapp.Controllers
             string json = "";
             ApiResult<WXApiRspModel> r = new ApiResult<WXApiRspModel>();
 
-            StringBuilder headerdic = new StringBuilder();
-            foreach (var item in Request.Headers)
-            {
-                headerdic.AppendLine($"{item.Key}:{item.Value}");
-            }
+            //StringBuilder headerdic = new StringBuilder();
+            //foreach (var item in Request.Headers)
+            //{
+            //    headerdic.AppendLine($"{item.Key}:{item.Value}");
+            //}
 
             try
             {
@@ -36,7 +36,7 @@ namespace aspnetapp.Controllers
                 req.cloudid = cloudid;
 
                 Log(nameof(WXController), $"ip:{base.RemoteIP}", JsonConvert.SerializeObject(req));
-                Log(nameof(WXController), $"ip:{base.RemoteIP}", headerdic.ToString());
+                //Log(nameof(WXController), $"ip:{base.RemoteIP}", headerdic.ToString());
 
                 json = await GetOpenData(req.appid, req.openid, req.cloudid);
                 var obj = JsonConvert.DeserializeObject<WXApiRspModel>(json);
