@@ -13,8 +13,8 @@ namespace aspnetapp.Controllers
     public class WXController : EnhancedApiController
     {
         [HttpPost]
-        [Route("LoadWXOpenData")]
-        public async Task<ApiResult<string>> LoadWXOpenData(string cloudid)
+        [Route("GetWXOpenData")]
+        public async Task<ApiResult<string>> GetWXOpenData(string cloudid)
         {
             ReqWXOpenDataModel req = new ReqWXOpenDataModel();
              
