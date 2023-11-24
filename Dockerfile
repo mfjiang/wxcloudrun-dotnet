@@ -4,14 +4,11 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositorie
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-#COPY *.sln .
-#COPY aspnetapp/*.csproj ./aspnetapp/
-COPY * ./
+COPY /. ./
 RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
 
 # copy everything else and build app
-#COPY aspnetapp/. ./aspnetapp/
-#COPY * ./
+COPY /. ./
 WORKDIR /source/aspnetapp
 
 RUN dotnet publish -c release -o /app -r linux-musl-x64 --self-contained true --no-restore /p:PublishTrimmed=true /p:PublishReadyToRun=true /p:PublishSingleFile=true
