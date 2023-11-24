@@ -31,8 +31,8 @@ namespace aspnetapp.Controllers
 
             try
             {
-                req.openid = Request.Headers["x-wx-from-openid"].ToString();
-                req.appid = Request.Headers["x-wx-from-appid"].ToString();
+                req.openid = Request.Headers["X-WX-OPENID"].ToString();
+                req.appid = Request.Headers["X-WX-APPID"].ToString();
                 req.cloudid = cloudid;
 
                 Log(nameof(WXController), $"ip:{base.RemoteIP}", JsonConvert.SerializeObject(req));
