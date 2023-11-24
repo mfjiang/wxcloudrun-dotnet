@@ -12,7 +12,7 @@ namespace aspnetapp.Controllers
     [ApiController]
     public class WXController : EnhancedApiController
     {
-        [HttpPost]
+        [HttpGet]
         [Route("GetWXOpenData")]
         public async Task<ApiResult<string>> GetWXOpenData(string cloudid)
         {
