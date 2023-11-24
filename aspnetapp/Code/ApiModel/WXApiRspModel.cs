@@ -12,8 +12,8 @@
     public class WXRspData 
     {
         public string cloud_id { get; set; }
-        public string json { get; set; }
-        public WXRspInnerData data { get; set; }
+        public WXRspInnerData json { get; set; }
+        public object data { get; set; }
     }
 
     [Serializable]
