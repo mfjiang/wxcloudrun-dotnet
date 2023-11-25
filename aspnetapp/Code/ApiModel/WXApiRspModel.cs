@@ -12,14 +12,19 @@
     public class WXRspData 
     {
         public string cloud_id { get; set; }
-        public WXRspInnerData json { get; set; }
-        public object data { get; set; }
+        public string json { get; set; }
+        public WXRspInnerJsonObj JsonObj { get; set; }
+        public dynamic data { get; set; }
     }
 
-    [Serializable]
-    public class WXRspInnerData 
-    {
+    public class WXRspInnerJsonObj
+    { 
         public string cloudID { get; set; }
-        public Dictionary<string, string> data { get; set; }
+        public WXRspInnerJsonObj_Data data { get; set; }
+    }
+
+    public class WXRspInnerJsonObj_Data
+    { 
+        public string opengid { get; set; }
     }
 }
